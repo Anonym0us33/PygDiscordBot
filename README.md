@@ -1,3 +1,6 @@
+#forked repo:
+https://github.com/ausboss/PygDiscordBot
+
 # update
 apparently people still use this. I appreciate that so I will start improving the main repo again. I added a few changes. 
 

@@ -14,15 +14,18 @@ class ListenerCog(commands.Cog, name="listener"):
     async def has_image_attachment(self, message):
         url_pattern = re.compile(r'http[s]?://[^\s/$.?#].[^\s]*\.(jpg|jpeg|png|gif)', re.IGNORECASE)
         tenor_pattern = re.compile(r'https://tenor.com/view/[\w-]+')
+        giphy_pattern = re.compile(r'https://giphy.com/gifs/[\w-]+')
+
         for attachment in message.attachments:
             if attachment.filename.lower().endswith((".jpg", ".jpeg", ".png", ".gif")):
                 return True
             # Check if the message content contains a URL that ends with an image file extension
         if url_pattern.search(message.content):
             return True
-        # Check if the message content contains a Tenor GIF URL
-
+        # Check if the message content contains a Tenor/giphy GIF URL
         elif tenor_pattern.search(message.content):
+            return True
+        elif giphy_pattern.search(message.content):
             return True
         else:
             return False

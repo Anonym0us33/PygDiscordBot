@@ -129,10 +129,10 @@ if os.path.exists("chardata.json"):
     print(f"Last Character used: {character_data['char_name']}")
     # Set up the timer
     try:
-        answer = input(f"\nUse this character? (y/n) [y]: ")
+        # answer = input(f"\nUse this character? (y/n) [y]: ")
+        answer = "n"
     except:
         answer = "y"
-
 else:
     answer = "n"
 
@@ -143,6 +143,7 @@ if answer.lower() == "n":
     while selected_char is None:
         try:
             selected_char = int(input(f"\n\nPlease select a character: ")) - 1
+            # selected_char =  1
             if selected_char < 0 or selected_char >= len(characters):
                 raise ValueError
         except ValueError:
@@ -165,7 +166,8 @@ else:
 
 
 # add error catching for invalid endpoint
-llm_selected = input("Select LLM (1: Kobold, 2: Oobabooga): ")
+# llm_selected = input("Select LLM (1: Kobold, 2: Oobabooga): ")
+llm_selected = "1"
 if llm_selected == "1":
     bot.endpoint_type = "Kobold"
     bot.llm = KoboldApiLLM(endpoint=bot.endpoint)

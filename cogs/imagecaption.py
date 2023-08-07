@@ -36,7 +36,23 @@ class ImageCaptionCog(commands.Cog, name="image_caption"):
             message_content = f"{message_content} [{message.author.name} posts an animated {sentence} ]"
             message_content = message_content.replace(tenor_url, "")
             return message_content
-
+        elif "https://giphy.com/gifs/" in message_content:
+            # Extract the giphy GIF URL from the message content
+            start_index = message_content.index("https://giphy.com/gifs/")
+            end_index = message_content.find(" ", start_index)
+            if end_index == -1:
+                giphy_url = message_content[start_index:]
+            else:
+                giphy_url = message_content[start_index:end_index]
+            # Split the URL on forward slashes
+            parts = giphy_url.split("/")
+            # Extract the relevant words from the URL
+            words = parts[-1].split("-")[:-1]
+            # Join the words into a sentence
+            sentence = " ".join(words)
+            message_content = f"{message_content} [{message.author.name} posts an animated {sentence} ]"
+            message_content = message_content.replace(giphy_url, "")
+            return message_content
         elif url_pattern.match(message_content):
             # Download the image from the URL and convert it to a PIL image
             response = requests.get(message_content)
